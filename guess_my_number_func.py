@@ -4,11 +4,11 @@ low = 0
 
 def enter_answer():
     return input("Enter 'h' to indicate the guess is too high. "
-               "Enter 'l' to indicate the guess is too low. Enter 'c' to indicate I guessed correctly. ")
+                 "Enter 'l' to indicate the guess is too low. Enter 'c' to indicate I guessed correctly. ")
 
 
 def try_guess(high, low):
-    guess = int((high - low) /2.0 + low)
+    guess = int((high - low) / 2.0 + low)
     print("Is your secret number " + str(guess) + "?")
     return guess
 
