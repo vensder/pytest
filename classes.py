@@ -8,21 +8,26 @@ def delta(L1,L2):
 class CoordN(object):
     Nmax = 4
     def __init__(self, *args):
-        self.coords = []
+        self.coords = ()
         self.dimentions = len(args)
         for i in range(self.dimentions):
-            self.coords.append(args[i])
+            self.coords = self.coords +(args[i],)
     def distance(self,other):
         if isinstance(other, CoordN):
             if self.dimentions == other.dimentions:
-                self.deltas = []
+                self.deltas = ()
                 for i in range(self.dimentions):
-                    self.deltas.append((self.coords[i] - other.coords[i])**2)
+                    self.deltas = self.deltas + ((self.coords[i] - other.coords[i])**2,)
                 return (sum(self.deltas))**0.5
             else:
                 raise ValueError('Not the same dimentions')
         else:
             raise ValueError('not the same type')
+    def __sub__(self, other):
+        self.substraction = ()
+        for i in range(self.dimentions):
+            self.substraction = self.substraction + (self.coords[i] - other.coords[i],)
+        return eval ('CoordN' + str(self.substraction))
 
 
 class Coord1(object):
@@ -48,7 +53,6 @@ class Coord(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-
     def distance(self, other):
         if isinstance(other, Coord):
             x_d = (self.x - other.x)**2
@@ -56,6 +60,8 @@ class Coord(object):
             return (x_d + y_d)**0.5
         else:
             raise ValueError('not the same type')
+    def __sub__(self, other):
+        return Coord(self.x - other.x, self.y - other.y)
 
     
 class coord(object):
@@ -64,8 +70,8 @@ class coord(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-       
-    
+
+        
 class Single(object):
     numbers = 0
 
