@@ -5,32 +5,32 @@ def delta(L1,L2):
     return (sum(deltas))**0.5
 
 
-class CoordN(object):
-    Nmax = 4
+class CoordN():
     def __init__(self, *args):
-        self.coords = ()
+        self.coords = args
         self.dimentions = len(args)
-        for i in range(self.dimentions):
-            self.coords = self.coords +(args[i],)
-    def distance(self,other):
-        if isinstance(other, CoordN):
-            if self.dimentions == other.dimentions:
-                self.deltas = ()
-                for i in range(self.dimentions):
-                    self.deltas = self.deltas + ((self.coords[i] - other.coords[i])**2,)
-                return (sum(self.deltas))**0.5
-            else:
-                raise ValueError('Not the same dimentions')
+    def __check(self, other):
+        if not isinstance(other, CoordN):
+            raise ValueError('Not the same type')
         else:
-            raise ValueError('not the same type')
+            if self.dimentions != other.dimentions:
+               raise ValueError('Not the same dimentions')
+    def distance(self, other):
+        self.__check(other)
+        self.deltas = ()
+        for i in range(self.dimentions):
+            self.deltas += ((self.coords[i] - other.coords[i])**2,)
+        return (sum(self.deltas))**0.5
     def __sub__(self, other):
+        self.__check(other)
         self.substraction = ()
         for i in range(self.dimentions):
-            self.substraction = self.substraction + (self.coords[i] - other.coords[i],)
-        return eval ('CoordN' + str(self.substraction))
+            self.substraction += (self.coords[i] - other.coords[i],)
+        # return eval ('CoordN' + str(self.substraction))
+        return CoordN(*self.substraction)
 
 
-class Coord1(object):
+class Coord1():
     def __init__(self, x):
         self.x = x
     def distance(self, other):
@@ -96,3 +96,13 @@ class Counter(object):
         self.count += 1
 
 
+c1 = CoordN(0,0,0)
+c2 = CoordN(2,2,2)
+print(c2.distance(c1))
+d = c2 - c1
+print(d.coords)
+
+##c3 = CoordN(3,3)
+##print(c3.distance(c1))
+##d3 = c3 - c1
+##print(d3.coords)
