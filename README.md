@@ -1,2 +1,2 @@
 # pytest
-python testing apps
+python testing apps and courses exercises
