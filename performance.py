@@ -9,7 +9,7 @@ def search_for_elm(L,e):
     return False
 
 
-L = list(string.ascii_lowercase)[:-1]
+L = 100 * list(string.ascii_lowercase)[:-1]
 
 
 for l in ['a', 'z']:
@@ -29,3 +29,19 @@ for l in ['a', 'z']:
         
     elapsed_time = time.process_time() -t
     print(round(elapsed_time, 6), S, l)
+
+
+
+def program1(x):
+    total = 0
+    for i in range(1000):
+        total += i
+
+    while x > 0:
+        x -= 1
+        total += x
+
+    return total
+
+
+
