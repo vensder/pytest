@@ -32,16 +32,18 @@ for l in ['a', 'z']:
 
 
 
-def program1(x):
-    total = 0
-    for i in range(1000):
-        total += i
+def genSubsets(L):
+    res = []
+    if len(L) == 0:
+        return [[]]
+    smaller = genSubsets(L[:-1])
+    extra = L[-1:]
+    new = []
+    for small in smaller:
+        new.append(small + extra)
+    return smaller + new
 
-    while x > 0:
-        x -= 1
-        total += x
 
-    return total
+L = list(string.ascii_lowercase)[0:10]
 
-
-
+print(genSubsets(L))
