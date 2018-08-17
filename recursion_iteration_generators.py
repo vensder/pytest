@@ -96,3 +96,60 @@ def genPrimes():
         guess += 2
             
     
+def h(n):
+    """assume n an int >= 0"""
+    answer = 0
+    s = str(n)
+    for c in s:
+        answer += int(c)
+    return answer
+
+
+num = 0
+def lenRecur(s):
+    global num
+    if s == '':
+        return 0
+    else:
+        num +=1
+        print(num)
+        return 1 + lenRecur(s[1:])
+
+
+
+
+def isIn(a, s):
+   '''
+   a is a character, or, singleton string.
+   s is a string, sorted in alphabetical order.
+   '''
+   if len(s) == 0:
+      return False
+   elif len(s) == 1:
+      return a == s
+   else:
+      test = s[len(s)//2]
+      if test == a:
+         return True
+      elif a < test:
+         return isIn(a, s[:len(s)//2])
+      else:
+         return isIn(a, s[len(s)//2+1:])
+
+
+def union(L1, L2):
+   '''
+   L1 & L2 are lists of the same length, n
+   '''
+   temp = L1[:]
+   for e2 in L2:
+      flag = False
+      for check in temp:
+         if e2 == check:
+            flag = True
+            break
+      if not flag:
+         temp.append(e2)
+   return temp
+
+
